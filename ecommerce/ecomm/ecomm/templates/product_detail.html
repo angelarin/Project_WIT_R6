@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<!--Main layout-->
+<main class="mt-5 pt-4">
+    <div class="container mt-5">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <img src="{{ object.gambar.url }}" class="img-fluid" alt="" />
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <!--Content-->
+                <div class="p-4">
+                    <div class="mb-3">
+                        <a href="">
+                            <span class="badge bg-dark me-1">{{ object.get_kategori_display }}</span>
+                        </a>
+                        {% if object.label == 'NEW' %}
+                        <a href="">
+                            <span class="badge bg-{{ object.get_label_display }} bg-dark me-1">New</span>
+                        </a>
+                        {% elif object.label == 'SALE' %}
+                        <a href="">
+                            <span class="badge bg-{{ object.get_label_display }} bg-dark me-1">Sale</span>
+                        </a>
+                        {% else %}
+                        <a href="">
+                            <span class="badge bg-{{ object.get_label_display }} bg-dark me-1">Bestseller</span>
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    <p class="lead">
+                        {% if object.harga_diskon %}
+                        <span class="me-1">
+                            <del>${{ object.harga }}</del>
+                        </span>
+                        <span>${{ object.harga_diskon }}</span>
+                        {% else %}
+                        <span>${{ object.harga }}</span>
+                        {% endif %}
+                    </p>
+
+                    <strong><p style="font-size: 20px;">Deskripsi</p></strong>
+
+                    <p>{{ object.deskripsi }}</p>
+                    <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary ms-1">
+                        Tambah ke keranjang
+                        <i class="fas fa-shopping-cart ms-1"></i>
+                    </a>
+                    <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger ms-1" >
+                        Kurangi keranjang
+                        <i class="fas fa-shopping-cart ms-1"></i>
+                    </a>
+                </div>
+                <!--Content-->
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <hr />
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+            <!--Grid column-->
+            <div class="col-md-6 text-center">
+                <h4 class="my-4 h4">Additional information</h4>
+
+                <p>Berikut ini merupakan produk yang akan segera hadir:</p>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-12 mb-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeCH5nSLHQkZw4pT8va3Q-PWWZE6bAUCuXRg&usqp=CAU" class="img-fluid" alt="" />
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEBUSExMVFRUXFRgYFhAVFRgVGBgWFxUXFxUSGBcYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGC0mHR0tLSsrLS0tLS0tLS0tLS0tLS0tLS0tLS4tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAAAgEDBAcIBgX/xABNEAACAQICBQcGCAsFCQAAAAAAAQIDEQQhBRIxQVEGByJhcYGREzJyscHwFCMlUnOCsuE1QlNidJKhs8LR8SREorTDFTM0Q2Nkg5Ok/8QAGAEBAAMBAAAAAAAAAAAAAAAAAAECAwT/xAAhEQEBAAICAQUBAQAAAAAAAAAAAQIRAzESEyEyQVEigf/aAAwDAQACEQMRAD8A3iAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHl+VfLvCYC8Jyc62rdUIJt33KUvNh3523MmS3oeoLVbEwh584x9KSXrOcuUfOJpDFya8s6FN7KNBuFl11F05Pjmk+CPIzpptyau3tk823xbe01nF+1TzdeUq0ZZxkpdaafqLhyBQWpLWh0ZbpReq13rNHqtC84GkcNbVxMqkV/y6960X2uT113SQvD+U83SoPB8kuc7DYqOriHHC1VunNeTl1xm7Wf5rt1X2nu4yTV1mnsZlcbO1pdqgAhIAAAAAAAAAAAAAAAAAAAAAAxNK6SpYajKtWmoU4K7k/BJJZtt5JLNmnuUnOziKrcMJFUKexVZJTqvrs7xh2dLtRbHC5dItkbnxWKhTi51JxhFbZTkopd7yPIaa5zcDQuoSliJ/NpLo99R2jbsuaKxeLqVpa9WpOpL51STm/GV7LqMerVtktpvOGfdUuf49nym5zcZiE4wksPTf4lJvXa66u39XVPBTrtvvu+tvO74lJZu7KWLySdKriknt8SuotzZGMC4kW0IeTW9hyS+8rYpKA0KRrNM9byY5cYvCJRpVdaC/u9Ra0O7fH6rR5HVK2Gt9jfWg+dXDVbRxEZYeXzs6lP8AWirrvVlxPcYHHUq0delUhUj86ElJeKOVqNa+T8S/QxE6ctenOUJLZOEnGS7HF3M7wS9JmdnbqoGieTnOli6DUa/9op/ndGol1TXnfWTvxRuXQOm6OMoqtQlrReTWyUZLbCS3NX/amrpmGXHce15lK+iACiwAAAAAAAAAAAAAAEZzSTbdkldvqW1gaX57tNueIp4SL6FJKU0vyk1kmuKg4tfSM1ykXeUOlXia9bEO/wAbVlJX2xi30F3LVXcY9Od438faduE1NMb7rrllltMWRdX3FuZZC22RTKyZQhKcWSbLViRIuKQbLZJBC46b1VKzs9jtk+KuUSPs42usPOVCEIyhaOv5S713a+vk1q7bZcDGx2GioQqwTUJ6y1G76souzV964ETLaWBql+LusyMEXNXeXVW3E9pzS6ddDSEaLfxddKElfLXz8nLt1uj9dnjZPo3KYGrKnUVSLtKLi4vg4dJP9ZrwK5Tc0T293V4MXReNVehSrR2VKcZrslFO37TKOB0AAAAAAAAAAAAAAeb5xtI+Q0Xip3s3SdOL361ToK3ZrX7j0hqTn30r0aGFT+dWmv8ABT8b1PAthN5It1GobLVaezh1Nf1LUZ6rs9+/r+9ZmW4+pZd2TMPFwyfHd1rh2nXfZlF6lO64lZSMXR89aHfb1GWJdwq3qFVAuorFFohacSuqXLFLBC3qktQm0STJH0aWlIuKjXoxraqtGWu6c0uDlFZohpLHOrqpQjThBWhTjsV9rb3t8TDRO/EeMN0hFk5vJiLI1tj7GWQxnK6t79SJx2dWbMejK7y37/W/YZTWXqKz3TW+eaDSPldGxg3eVGcqb7G9eHdaaX1T25pfmU0nqYurh28qtNSj6dPOy7Yym/qm6Dj5ZrKtsbuAAM1gAAAAAAAAAADmznB0n8K0jiam5S8lBP5tPoprqbUpfWN78t9L/BNH4iunaUYWg/8AqTahT/xSRzpU0hKpDVmlJpq1S1pLius24pe1M6xoPZ6uoxMfHIzJRt3GHpKXROjLpnO2HouXnLfv/n+w+gth87Q9Gc51Jxi3CEE5vdFSnGEb9spJd59HcU477LZdpwJFIrIqjSKIskvd8StyhINMr2BsMIShEQ4MrDb77OGZSW0kXEYelqtqdvnNR9vqT8TLWxd5lS5NTxODxOKjNRWE8nOUGn04y19azvk4qOy2d92+vJdY1OM93xaEk3bctv8AI+hbL38D4+jpZX4s+xGWRGF3E5PoaA0i8Li6OI3U6kZS9C9prvg5I6bTvmvE5iwOIowTdSm6kr9GN7RStv8AHgzfvIDS3wrR9Go0k0nCUVudNuK8Uk+8x559r8b0IAOdoAAAAAAAAAACFWlGUXGSUovJxaTTXBp7TxenubDBYi8qUXhp8aSWo+2k8rejqvrPbgmWzpFm2iNLc1+PotumoV48aclGVuLhO1uxOR4XTuhMXTup4WvHdnQqJdz1bPtR1iDT1bZqo8I0byY5LOhyYxdapBwq17VGpxcZKnRqrycbPNebKS9NGutx0xy+jfReM/R6j8IN+w5nk9hfh6Vz7Xvf9hH+RWT9ZFM3Zqpkk/f+hbTKrYSJgomUYE6e31bClV+sjT2kqzuu8CSll3mx+b/RUsTonSdGFtepHUhfY5Km3FX7WvE1nSd13m7uY+H9iry44lrwpUv5mfNf4Ww+TnrBz1G4z6LWThLotPemnmmep0XojEYq3wehUq3/ABoxbj3z81d7Onp0ISd3GLfFpNlwxx5dTWl7htp3QPNHVmlLF1VST20qdpztwc30YvsUjaOgdCUMHS8jh4akL6zTlKTcmknJuTbvZLwPogplnll2tMZAAFEgAAAAAAAAAAAAAAAPicuI30ZjV/2lf9zOxzG9qOqdO09bC14/Oo1F4waOVYS2diN+G+1Z5pN38RfIhfIlfJG6ivv2FUi2mTTyJEityN8ihKCD6ROayZZhLpe/WZEd4hVqg8n3G9eZP8H1P0mf7qkaIpbX2e031zKwto6b+diJtd0Kcf4THl+C+Pb3wAOVqAAAAAAAAAAAAAAAAAAAAALGOXxU/Ql9lnJdJ9Fej7DrPHv4qp6Evss5Lo+Z3L2G/D9qZqp5FWyNyN8zbai5Fk77SEUViShMiyiYT97kiF+kZNN5mHLKaMqnt8CIVbXnPs+86G5oI/JNF8Z1X4Vpx/hOeX550NzPv5Gw/pV/8zWMub4/6vh29mADmaAAAAAAAAAAAAAAAAAAAAADF0o/iKv0c/ss5Mp/7tdaR1fpydsLXfCjUfhBnKLjaEV1L1I24vtTNFopvJJZlLZmyiaJIgmSRYVCKXIykBaq+ejKp7TDq7UZsFmu0idlUnHpI6D5nZfI1DqlXX/01TQE45nQHM/+CKP0lf8AzNUpzfFbDt7MAHK0AAAAAAAAAAAAAAAAAAAAAHz+UP8AweI+gq/u5HKtfbbgjqLljNrR2La2rDVrdvkpHLleXSfvuN+LqqZKUykikWUbNVRFxMx7l6MhBIt3JORbUiRGttRl03sMOqZVJkTsrIm8+86A5opL/ZNJLaqle/a69Sfqkjn5yvmb75nl8mrrqz/hXsK83xMO3uAAcrUAAAAAAAAAAAAAAAAAAAAAfG5afg3Gfotb91I5bqxzfazpznArami8U+NKUc/z7Q/iOY2zo4umefaiRSRUjI1VW5k47CM4kqaArJFtFyWwpBAW6m4yaewx6xfpyE7KyG9hv3mdXyYnxq1PYvYaC3G8+ZPE62AqQ3wrvLqlTpyT8dbwK80/lOHbYQAORqAAAAAAAAAAAAAAAAAAAAAPKc6Gjq2I0ZVpUIOc3Kk9RbWo1oSla/BRv3HPWk9FYii35WhWppb6lKcF4tWZ1gDTDk8ZpW47cgQkmrp3EFxt79h1hjtCYatlWw9Gp9JShP7SPk1uQOjJbcFRXoR8n9ixrOafivg5lnHr9Yp7NqOiq3NXoqTv8HkuzEV1/qFl80mjPydVf+ao/WyfWxPCufZFIpe6+86BXNDoz8nV/wDfU9jL9Lmp0VH+7zfbiK/sqD1sTwrnSrHiVjNL8ZLtaR01Q5v9GQ2YKi/Ti6n22z7GB0Ph6CtRoUaS4U6cIfZSK+tPw8HNOjNA4qurUsNWqX2SjSnq/rtKO/ibm5peTWIwdKs8RBU3VcNWnrRlJKCldtxbWessr7me+BTPluU1paY6AAZLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=" class="img-fluid" alt="" />
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7vGMp4RPOHVw0cfqtGRDzuc79RIKC-Xp4sQ&usqp=CAU" class="img-fluid" alt="" />
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+<!--Main layout-->
+{% endblock content%}
