@@ -112,7 +112,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tokoini_db',
         'USER': 'postgres',
-        'PASSWORD': 'Bonbon1006',
+        'PASSWORD': '121345',
         'HOST': 'localhost',
         'PORT': '5432',
     }
